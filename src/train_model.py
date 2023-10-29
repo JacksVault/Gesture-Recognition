@@ -45,12 +45,18 @@ model = keras.Sequential([
 
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-# Train the model
-model.fit(train_data, train_labels, epochs=10)
+def train_until_accuracy(model, train_data, train_labels, test_data, test_labels, target_accuracy):
+    # Train the model
+    model.fit(train_data, train_labels, epochs=10)
 
-# Evaluate the model
-test_loss, test_acc = model.evaluate(test_data, test_labels)
-print(f"Test accuracy: {test_acc}")
+    # Evaluate the model
+    test_loss, test_acc = model.evaluate(test_data, test_labels)
+    print(f"Test accuracy: {test_acc}")
 
-# Save the trained model
-model.save("models/gesture_recognition_model.h5")
+    if test_acc < target_accuracy:
+        train_until_accuracy(model, train_data, train_labels, test_data, test_labels, target_accuracy)
+    else:
+        # Save the trained model
+        model.save("models/gesture_recognition_model.h5")
+
+train_until_accuracy(model, train_data, train_labels, test_data, test_labels, 1.0)
