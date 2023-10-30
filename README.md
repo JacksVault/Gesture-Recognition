@@ -59,5 +59,5 @@ Feel free to contribute to this project and explore new possibilities in the IoT
 
 If you prefer not to capture your dataset, you can find external datasets for hand gestures and sign language recognition in the `links for datasets/` directory.
 
-[External Gesture Datasets](./links%20for%20datasets/README.md)
+https://zenodo.org/records/3271625
 
